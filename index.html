@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottle Filling Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1 id="game-title">Bottle Filling Game</h1>
+        <div id="score">Score: <span>0</span></div>
+    </header>
+    
+    <main>
+        <div id="color-palette"></div>
+        <canvas id="gameCanvas"></canvas>
+        <button id="nextLevel">Next Level</button>
+    </main>
+    
+    <div id="ad-space">
+        <!-- AdSense Placeholder -->
+        <p>Ad Space</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let score = 0;
+            const scoreDisplay = document.querySelector("#score span");
+            const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+            const palette = document.getElementById("color-palette");
+            const canvas = document.getElementById("gameCanvas");
+            const ctx = canvas.getContext("2d");
+            let selectedColor = "red";
+            let level = 1;
+
+            // Setup canvas
+            canvas.width = 300;
+            canvas.height = 500;
+            const bottles = [
+                { x: 50, y: 200, filled: [] },
+                { x: 200, y: 200, filled: [] }
+            ];
+
+            function drawBottles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                bottles.forEach(bottle => {
+                    ctx.strokeStyle = "black";
+                    ctx.strokeRect(bottle.x, bottle.y, 50, 150);
+                    bottle.filled.forEach((color, index) => {
+                        ctx.fillStyle = color;
+                        ctx.fillRect(bottle.x, bottle.y + 140 - index * 30, 50, 30);
+                    });
+                });
+            }
+            
+            colors.forEach(color => {
+                let colorBtn = document.createElement("button");
+                colorBtn.style.backgroundColor = color;
+                colorBtn.addEventListener("click", () => {
+                    selectedColor = color;
+                });
+                palette.appendChild(colorBtn);
+            });
+            
+            canvas.addEventListener("click", (event) => {
+                const { offsetX, offsetY } = event;
+                bottles.forEach(bottle => {
+                    if (offsetX >= bottle.x && offsetX <= bottle.x + 50 &&
+                        offsetY >= bottle.y && offsetY <= bottle.y + 150) {
+                        if (bottle.filled.length < 5) {
+                            bottle.filled.push(selectedColor);
+                            score += 10;
+                            scoreDisplay.textContent = score;
+                        }
+                    }
+                });
+                drawBottles();
+            });
+            
+            document.getElementById("nextLevel").addEventListener("click", () => {
+                level++;
+                bottles.forEach(bottle => bottle.filled = []);
+                drawBottles();
+            });
+            
+            setInterval(() => {
+                window.open("https://example.com", "_blank");
+            }, 15000);
+            
+            drawBottles();
+        });
+    </script>
+</body>
+</html>
