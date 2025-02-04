@@ -1,96 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bottle Filling Game</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
-</head>
-<body>
-    <header>
-        <h1 id="game-title">Bottle Filling Game</h1>
-        <div id="score">Score: <span>0</span></div>
-    </header>
+<!doctype html>
+
+
     
-    <main>
-        <div id="color-palette"></div>
-        <canvas id="gameCanvas"></canvas>
-        <button id="nextLevel">Next Level</button>
-    </main>
     
-    <div id="ad-space">
-        <!-- AdSense Placeholder -->
-        <p>Ad Space</p>
+    Blogger Popup
+    <style>
+        /* Popup container */
+        .popup-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none; /* Hidden by default */
+        }
+
+        /* Popup content */
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Image styling */
+        .popup-image {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Buttons */
+        .popup-buttons {
+            margin-top: 15px;
+        }
+
+        .popup-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-accept {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-decline {
+            background-color: #dc3545;
+            color: #fff;
+        }
+    </style>
+
+
+
+    <!-- Popup container -->
+    <div id="popup" class="popup-container">
+        <div class="popup-content">
+            <h2>Welcome to Our Blog!</h2>
+      <a href="https://www.google.com" target="_blank" onclick="hidePopup()">      
+<img class="popup-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihqvN44px9mluQAN0vzStTOxJfcqgXWp6eMcRxhgm3rTZd5XfcnrFd3IETJTCfjXH71eiT9OgCDCXwkcV8VfK1beA7snKmnwAqMJe9T3X260kkNWkKid8731L_Al_WH61rwbGYD1czywajCQ0c32Hs9B4NMsHoyfIX_P6eyYgrfxnLiel5y2YZDQHG6yc/s600/depositphotos_76756387-stock-illustration-video-player-with-black.jpg" alt="Popup Image" />
+      </a>
+
+            <div class="popup-buttons">
+                <button class="btn-accept" onclick="openLink('https://www.google.com')">Download</button>
+                <button class="btn-decline" onclick="openLink('https://www.google.com')">Watch</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            let score = 0;
-            const scoreDisplay = document.querySelector("#score span");
-            const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
-            const palette = document.getElementById("color-palette");
-            const canvas = document.getElementById("gameCanvas");
-            const ctx = canvas.getContext("2d");
-            let selectedColor = "red";
-            let level = 1;
+        // Function to show popup when page loads
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('popup').style.display = 'flex';
+            }, 000); // Show popup after 00seconds
+        }
 
-            // Setup canvas
-            canvas.width = 300;
-            canvas.height = 500;
-            const bottles = [
-                { x: 50, y: 200, filled: [] },
-                { x: 200, y: 200, filled: [] }
-            ];
-
-            function drawBottles() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                bottles.forEach(bottle => {
-                    ctx.strokeStyle = "black";
-                    ctx.strokeRect(bottle.x, bottle.y, 50, 150);
-                    bottle.filled.forEach((color, index) => {
-                        ctx.fillStyle = color;
-                        ctx.fillRect(bottle.x, bottle.y + 140 - index * 30, 50, 30);
-                    });
-                });
-            }
-            
-            colors.forEach(color => {
-                let colorBtn = document.createElement("button");
-                colorBtn.style.backgroundColor = color;
-                colorBtn.addEventListener("click", () => {
-                    selectedColor = color;
-                });
-                palette.appendChild(colorBtn);
-            });
-            
-            canvas.addEventListener("click", (event) => {
-                const { offsetX, offsetY } = event;
-                bottles.forEach(bottle => {
-                    if (offsetX >= bottle.x && offsetX <= bottle.x + 50 &&
-                        offsetY >= bottle.y && offsetY <= bottle.y + 150) {
-                        if (bottle.filled.length < 5) {
-                            bottle.filled.push(selectedColor);
-                            score += 10;
-                            scoreDisplay.textContent = score;
-                        }
-                    }
-                });
-                drawBottles();
-            });
-            
-            document.getElementById("nextLevel").addEventListener("click", () => {
-                level++;
-                bottles.forEach(bottle => bottle.filled = []);
-                drawBottles();
-            });
-            
-            setInterval(() => {
-                window.open("https://example.com", "_blank");
-            }, 15000);
-            
-            drawBottles();
-        });
+        // Function to open a URL in a new tab and close the popup
+        function openLink(url) {
+            window.open(url, '_blank'); // Open URL in new tab
+            document.getElementById('popup').style.display = 'none'; // Close popup
+        }
     </script>
-</body>
-</html>
+
+
+</!doctype>
