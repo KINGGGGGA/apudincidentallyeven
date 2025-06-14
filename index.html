@@ -1,98 +1,107 @@
 <!doctype html>
 
+<style>
+    /* Popup container */
+    .popup-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        display: none;
+    }
 
-    
-    
+    /* Popup content */
+    .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 600px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
 
-    <style>
-        /* Popup container */
-        .popup-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            display: none; /* Hidden by default */
-        }
+    /* Image styling */
+    .popup-image {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        max-height: 500px;
+        object-fit: cover;
+    }
 
-        /* Popup content */
+    /* Buttons */
+    .popup-buttons {
+        margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .popup-buttons button {
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .btn-accept {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+    .btn-decline {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    @media (max-width: 480px) {
         .popup-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Image styling */
-        .popup-image {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-
-        /* Buttons */
-        .popup-buttons {
-            margin-top: 15px;
+            padding: 15px;
         }
 
         .popup-buttons button {
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
+            width: 100%;
+            font-size: 14px;
         }
+    }
+</style>
 
-        .btn-accept {
-            background-color: #28a745;
-            color: #fff;
-        }
+<!-- Popup container -->
+<div id="popup" class="popup-container">
+    <div class="popup-content">
+        <h2>Welcome!</h2>
+        <a href="https://dullfruitful.com/dd2ymjy1?key=cea6cb43ecf889a7f8b5df8dfe65a892" target="_blank" onclick="hidePopup()">
+            <img class="popup-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSyyIq_k95Q6US1HNZuIB1cK3px3P2-EVX-5y1W7IFM0sOz2Twc5z1qQeRmykw5vVCGk528ytlI0VnKBHWrCykn5BMzQipIkCO3oDIL6Jgq1PgIWIQnGg95bllEs0ugAznN6CyuhvDPmNddgt5ZfVbk0AKYxvStROd6bqhfd8YIjaMTeoFeb-NH69itvYv/s320/455001874_120211877068080650_5454801751853115264_n.jpg" alt="Popup Image" />
+        </a>
 
-        .btn-decline {
-            background-color: #dc3545;
-            color: #fff;
-        }
-    </style>
-
-
-
-    <!-- Popup container -->
-    <div id="popup" class="popup-container">
-        <div class="popup-content">
-            <h3>Click To Play !</h3>
-      <a href="https://dullfruitful.com/dd2ymjy1?key=cea6cb43ecf889a7f8b5df8dfe65a892" target="_blank" onclick="hidePopup()">      
-<img class="popup-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSyyIq_k95Q6US1HNZuIB1cK3px3P2-EVX-5y1W7IFM0sOz2Twc5z1qQeRmykw5vVCGk528ytlI0VnKBHWrCykn5BMzQipIkCO3oDIL6Jgq1PgIWIQnGg95bllEs0ugAznN6CyuhvDPmNddgt5ZfVbk0AKYxvStROd6bqhfd8YIjaMTeoFeb-NH69itvYv/s320/455001874_120211877068080650_5454801751853115264_n.jpg" alt="Popup Image" />
-      </a>
-
-            <div class="popup-buttons">
-                <button class="btn-accept" onclick="openLink('https://dullfruitful.com/dd2ymjy1?key=cea6cb43ecf889a7f8b5df8dfe65a892)">Download</button>
-                <button class="btn-decline" onclick="openLink('https://dullfruitful.com/dd2ymjy1?key=cea6cb43ecf889a7f8b5df8dfe65a892')">Watch</button>
-            </div>
+        <div class="popup-buttons">
+            <button class="btn-accept" onclick="openLink('https://dullfruitful.com/dd2ymjy1?key=cea6cb43ecf889a7f8b5df8dfe65a892')">Download</button>
+            <button class="btn-decline" onclick="openLink('https://dullfruitful.com/dd2ymjy1?key=cea6cb43ecf889a7f8b5df8dfe65a892')">Watch</button>
         </div>
     </div>
+</div>
 
-    <script>
-        // Function to show popup when page loads
-        window.onload = function() {
-            setTimeout(() => {
-                document.getElementById('popup').style.display = 'flex';
-            }, 000); // Show popup after 00seconds
-        }
+<script>
+    // Function to show popup when page loads
+    window.onload = function () {
+        setTimeout(() => {
+            document.getElementById('popup').style.display = 'flex';
+        }, 0);
+    }
 
-        // Function to open a URL in a new tab and close the popup
-        function openLink(url) {
-            window.open(url, '_blank'); // Open URL in new tab
-            document.getElementById('popup').style.display = 'none'; // Close popup
-        }
-    </script>
-
-
-</!doctype>
+    // Function to open a URL in a new tab and close the popup
+    function openLink(url) {
+        window.open(url, '_blank');
+        document.getElementById('popup').style.display = 'none';
+    }
+</script>
